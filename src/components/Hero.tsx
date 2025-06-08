@@ -20,7 +20,7 @@ const Hero = () => {
             className="mb-6"
           >
             <h1 className="font-poppins text-5xl md:text-7xl font-bold mb-4">
-              <span className="text-gray-100">Hi, I'm </span>
+              <span className="text-gray-100">Hi, I&apos;m </span>
               <span className="gradient-text">Lloyd</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-medium">
