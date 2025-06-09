@@ -115,7 +115,11 @@ const Hero = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="text-gray-400 cursor-pointer"
-          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
         >
           <ArrowDown size={24} />
         </motion.div>

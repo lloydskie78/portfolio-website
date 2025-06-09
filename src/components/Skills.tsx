@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code, Database, Server, Wrench, Cloud, Smartphone } from 'lucide-react';
+import { Code, Database, Server, Wrench, Smartphone } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -54,22 +54,11 @@ const Skills = () => {
       ],
     },
     {
-      title: 'Cloud Platforms',
-      icon: Cloud,
-      skills: [
-        { name: 'Azure', level: 80 },
-        { name: 'AWS', level: 75 },
-        { name: 'Google Cloud', level: 70 },
-        { name: 'Vercel', level: 85 },
-        { name: 'Netlify', level: 85 },
-        { name: 'DigitalOcean', level: 80 },
-      ],
-    },
-    {
       title: 'Mobile & Other',
       icon: Smartphone,
       skills: [
-        { name: 'Flutter', level: 70 },
+        { name: 'Vercel', level: 85 },
+        { name: 'Netlify', level: 85 },
         { name: 'API Development', level: 90 },
         { name: 'OAuth', level: 85 },
         { name: 'Payment Gateways', level: 80 },

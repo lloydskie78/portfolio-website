@@ -7,8 +7,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
@@ -30,7 +32,7 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
+        isMounted && scrolled 
           ? 'bg-gray-900/80 backdrop-blur-md shadow-lg border-b border-gray-700' 
           : 'bg-transparent'
       }`}
