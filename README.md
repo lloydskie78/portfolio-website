@@ -161,9 +161,9 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 If you have any questions or need help customizing the portfolio, feel free to reach out:
 
-- Email: your.email@example.com
-- GitHub: @yourusername
-- LinkedIn: @yourprofile
+- Email: lloyd_alcantara@umindanao.edu.ph
+- GitHub: @lloydskie78
+- LinkedIn: @lloyd-alcantara
 
 ---
 
