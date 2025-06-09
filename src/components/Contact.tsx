@@ -2,8 +2,53 @@
 
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
+import { useState } from 'react';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('https://formspree.io/f/xqabpqaq', { // Replace YOUR_FORM_ID with your actual Formspree form ID
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const contactInfo = [
     {
@@ -148,7 +193,29 @@ const Contact = () => {
             className="bg-gray-800/50 p-8 rounded-xl border border-gray-700"
           >
             <h3 className="text-2xl font-semibold mb-6 text-gray-100">Send a Message</h3>
-            <form className="space-y-6">
+            
+            {/* Success/Error Messages */}
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-green-600/20 border border-green-600/50 rounded-lg text-green-400"
+              >
+                                 Thank you! Your message has been sent successfully. I&apos;ll get back to you soon.
+              </motion.div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-red-600/20 border border-red-600/50 rounded-lg text-red-400"
+              >
+                Sorry, there was an error sending your message. Please try again or contact me directly.
+              </motion.div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -158,6 +225,9 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                     placeholder="John Doe"
                   />
@@ -170,6 +240,9 @@ const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                     placeholder="john@example.com"
                   />
@@ -184,6 +257,9 @@ const Contact = () => {
                   type="text"
                   id="subject"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                   placeholder="Project Discussion"
                 />
@@ -196,6 +272,9 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
                   rows={6}
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-vertical"
                   placeholder="Tell me about your project..."
@@ -204,12 +283,15 @@ const Contact = () => {
 
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full btn-primary flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02, y: isSubmitting ? 0 : -1 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                className={`w-full btn-primary flex items-center justify-center gap-2 ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
                 <Send size={18} />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
             </form>
 
