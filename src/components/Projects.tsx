@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Calendar, Users, Zap, Award, Database, Globe } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { ExternalLink, Github, Users, Zap, Globe, Database, X } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
@@ -24,52 +25,52 @@ const Projects = () => {
       icon: Globe,
       link: 'https://citihardware.com',
       github: '',
-      image: '/api/placeholder/600/400',
+      image: '/citihardware.jpeg',
     },
     {
-      title: 'InfoSoft CRM System',
-      description: 'Built a customer relationship management system with advanced analytics, lead tracking, and automated workflow capabilities.',
-      tech: ['ASP.NET', 'React.js', 'SQL Server', 'Azure'],
-      category: 'CRM',
+      title: 'Chozi Real Estate App',
+      description: 'Built a comprehensive real estate management platform with property listings, search functionality, and client management features.',
+      tech: ['Laravel', 'React', 'Tailwind', 'MongoDB', 'MySQL'],
+      category: 'Real Estate',
       icon: Users,
-      link: 'https://infosoftstudio.com',
+      link: 'http://chozi.com/',
       github: '',
-      image: '/api/placeholder/600/400',
+      image: '/chozi.jpeg',
     },
     {
-      title: 'Real-time Chat Application',
-      description: 'Developed a real-time messaging platform with Vue.js, Laravel, and Pusher for instant communication and file sharing.',
-      tech: ['Laravel', 'Vue.js', 'Pusher', 'WebSockets'],
-      category: 'Real-time',
-      icon: Calendar,
-      link: '',
-      github: 'https://github.com/lloydskie78/chatapp-laravel-vue-pusher',
-      image: '/api/placeholder/600/400',
-    },
-    {
-      title: 'Django E-commerce Store',
-      description: 'Built a modern e-commerce platform using Django and Vue.js with secure payment integration and responsive design.',
-      tech: ['Django', 'Vue.js', 'PostgreSQL', 'Stripe'],
-      category: 'E-commerce',
+      title: 'VBooks Accounting Software',
+      description: 'Developed comprehensive accounting software for Vyde with financial reporting, transaction management, and automated bookkeeping capabilities.',
+      tech: ['Laravel', 'Vue.js', 'Tailwind', 'MySQL', 'MongoDB'],
+      category: 'Accounting',
       icon: Database,
-      link: '',
-      github: 'https://github.com/lloydskie78/django-ecom',
-      image: '/api/placeholder/600/400',
-    },
-    {
-      title: 'Dormee Management System',
-      description: 'Created a comprehensive dormitory management system with booking, payments, and resident management features.',
-      tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
-      category: 'Management',
-      icon: Award,
-      link: '',
-      github: 'https://github.com/lloydskie78/Dormee',
-      image: '/api/placeholder/600/400',
+      link: 'https://books.vyde.io/',
+      github: '',
+      image: '/vyde-accounting.png',
     },
   ];
 
-  const categories = ['All', 'AI/ML', 'E-commerce', 'CRM', 'Real-time', 'Management'];
+  const categories = ['All', 'AI/ML', 'E-commerce', 'Real Estate', 'Accounting'];
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    if (selectedImage) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage]);
 
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
@@ -129,9 +130,34 @@ const Projects = () => {
               className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-300"
             >
               {/* Project Image/Icon */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center">
-                <project.icon size={48} className="text-blue-400" />
-                <div className="absolute top-4 right-4">
+              <div 
+                className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-600/20 overflow-hidden cursor-pointer group"
+                onClick={() => {
+                  if (project.image && project.image !== '/api/placeholder/600/400') {
+                    setSelectedImage(project.image);
+                  }
+                }}
+              >
+                {project.image && project.image !== '/api/placeholder/600/400' ? (
+                  <>
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 text-white font-medium transition-opacity duration-300">
+                        Click to view
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <project.icon size={48} className="text-blue-400" />
+                  </div>
+                )}
+                <div className="absolute top-4 right-4 z-10">
                   <span className="px-3 py-1 text-xs font-medium bg-gray-900/50 text-gray-300 rounded-full">
                     {project.category}
                   </span>
@@ -210,6 +236,48 @@ const Projects = () => {
           </motion.a>
         </motion.div>
       </div>
+
+      {/* Image Modal/Lightbox */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', duration: 0.3 }}
+              className="relative max-w-7xl max-h-[90vh] w-full mx-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.button
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10 p-2 hover:bg-white/10 rounded-full"
+                aria-label="Close modal"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <X size={32} />
+              </motion.button>
+              <div className="relative w-full h-[90vh] rounded-lg overflow-hidden bg-gray-900/50">
+                <Image
+                  src={selectedImage}
+                  alt="Project preview"
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
