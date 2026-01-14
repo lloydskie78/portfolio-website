@@ -173,7 +173,7 @@ const Contact = () => {
                   LinkedIn
                 </a>
                 <a
-                  href="https://github.com/lloydgene"
+                  href="https://github.com/lloydskie78"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors duration-300"

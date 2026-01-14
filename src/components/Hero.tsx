@@ -78,7 +78,7 @@ const Hero = () => {
               <Linkedin size={24} />
             </motion.a>
             <motion.a
-              href="https://github.com/lloydgene"
+              href="https://github.com/lloydskie78"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2, y: -2 }}
