@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { ArrowDown, FileText, Github, Linkedin, Mail, Phone } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -60,6 +60,17 @@ const Hero = () => {
             >
               View My Work
             </motion.a>
+            <motion.a
+              href="https://drive.google.com/file/d/1xGFDXocKTnhANw3hoZw-J_j2KP98sSs0/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-secondary bg-gray-800 text-gray-200 border-gray-600 hover:bg-gray-700 hover:border-gray-500 inline-flex items-center gap-2"
+            >
+              <FileText size={18} />
+              View Resume
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -87,7 +98,7 @@ const Hero = () => {
               <Github size={24} />
             </motion.a>
             <motion.a
-              href="mailto:lloyd_alcantara@umindanao.edu.ph"
+              href="mailto:alcantaralloydgene@gmail.com"
               whileHover={{ scale: 1.2, y: -2 }}
               className="text-gray-400 hover:text-red-400 transition-colors duration-300"
             >

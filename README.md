@@ -161,7 +161,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 If you have any questions or need help customizing the portfolio, feel free to reach out:
 
-- Email: lloyd_alcantara@umindanao.edu.ph
+- Email: alcantaralloydgene@gmail.com
 - GitHub: @lloydskie78
 - LinkedIn: @lloyd-alcantara
 

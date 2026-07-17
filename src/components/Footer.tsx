@@ -17,7 +17,7 @@ const Footer = () => {
     },
     {
       icon: Mail,
-      href: 'mailto:lloyd_alcantara@umindanao.edu.ph',
+      href: 'mailto:alcantaralloydgene@gmail.com',
       label: 'Email',
     },
     {
@@ -126,10 +126,10 @@ const Footer = () => {
                 <div>
                   <p className="text-sm">Email</p>
                   <a 
-                    href="mailto:lloyd_alcantara@umindanao.edu.ph"
+                    href="mailto:alcantaralloydgene@gmail.com"
                     className="hover:text-gray-200 transition-colors duration-300"
                   >
-                    lloyd_alcantara@umindanao.edu.ph
+                    alcantaralloydgene@gmail.com
                   </a>
                 </div>
                 <div>

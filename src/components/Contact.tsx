@@ -54,8 +54,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'lloyd_alcantara@umindanao.edu.ph',
-      href: 'mailto:lloyd_alcantara@umindanao.edu.ph',
+      value: 'alcantaralloydgene@gmail.com',
+      href: 'mailto:alcantaralloydgene@gmail.com',
       description: 'Send me an email anytime',
     },
     {
