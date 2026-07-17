@@ -3,19 +3,29 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ExternalLink, Github, Users, Zap, Globe, Database, X } from 'lucide-react';
+import { ExternalLink, Github, Users, Zap, Globe, Database, X, Calculator, LineChart } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Vyde AI Transaction Processor',
-      description: 'Engineered AI-powered transaction categorization system that reduced manual errors by 65% and processed thousands of financial transactions daily.',
-      tech: ['Vue.js', 'Python', 'Machine Learning', 'PostgreSQL'],
-      category: 'AI/ML',
-      icon: Zap,
-      link: 'https://vyde.io',
+      title: 'IoM Payroll System',
+      description: 'Built a multi-tenant payroll platform for Isle of Man businesses with ITIP and NI calculations, automated pay runs, PDF payslips, and T14/T35 reporting, secured by database-level tenant isolation.',
+      tech: ['Laravel', 'React', 'TypeScript', 'Tailwind', 'PostgreSQL'],
+      category: 'Fintech / Payroll',
+      icon: Calculator,
+      link: 'https://payrollmann.com',
       github: '',
-      image: '/api/placeholder/600/400',
+      image: '/iompayroll.png',
+    },
+    {
+      title: 'Revel Dashboard',
+      description: 'Built a CEO analytics platform that unifies Shopify, Katana, QuickBooks, GA4, and Richpanel into reconciled revenue, COGS, and KPI views, with immutable month-close snapshots and a range-aggregation layer for YTD reporting.',
+      tech: ['Next.js', 'TypeScript', 'React', 'Prisma', 'PostgreSQL', 'Tailwind', 'Inngest', 'Recharts'],
+      category: 'Analytics / Finance Ops',
+      icon: LineChart,
+      link: 'https://dashboard.revelbikes.com',
+      github: '',
+      image: '/revel-dash.png',
     },
     {
       title: 'CitiHardware E-commerce Platform',
@@ -47,9 +57,19 @@ const Projects = () => {
       github: '',
       image: '/vyde-accounting.png',
     },
+    {
+      title: 'Vyde AI Transaction Processor',
+      description: 'Engineered AI-powered transaction categorization system that reduced manual errors by 65% and processed thousands of financial transactions daily.',
+      tech: ['Vue.js', 'Python', 'Machine Learning', 'PostgreSQL'],
+      category: 'AI/ML',
+      icon: Zap,
+      link: 'https://vyde.io',
+      github: '',
+      image: '/api/placeholder/600/400',
+    },
   ];
 
-  const categories = ['All', 'AI/ML', 'E-commerce', 'Real Estate', 'Accounting'];
+  const categories = ['All', 'AI/ML', 'E-commerce', 'Real Estate', 'Accounting', 'Fintech / Payroll', 'Analytics / Finance Ops'];
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
