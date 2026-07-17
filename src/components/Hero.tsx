@@ -34,7 +34,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            Crafting innovative web applications with 5+ years of experience in Vue.js, React.js, PHP, and Python. 
+            Crafting innovative web applications with 6+ years of experience in Vue.js, React.js, PHP, and Python.
             Passionate about creating scalable solutions that drive business growth and enhance user experiences.
           </motion.p>
 

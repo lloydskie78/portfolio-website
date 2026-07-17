@@ -8,7 +8,7 @@ const About = () => {
     {
       icon: Code,
       title: 'Full Stack Development',
-      description: '5+ years of experience building end-to-end web applications',
+      description: '6+ years of experience building end-to-end web applications',
     },
     {
       icon: Zap,
